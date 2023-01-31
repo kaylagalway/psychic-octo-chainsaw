@@ -1,11 +1,8 @@
-CREATE
-docker build -t <image name> .
-
 START
-docker run <image name>
+docker compose up -d
 
 CONNECT
 docker container exec -it <container name> /bin/bash
 
 STOP
-docker stop <container id>
+docker compose stop
