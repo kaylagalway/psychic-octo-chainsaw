@@ -6,3 +6,5 @@ RUN cargo init
 COPY Cargo.toml /code/Cargo.toml
 RUN cargo fetch
 COPY . /code
+RUN cargo build
+RUN cargo run
