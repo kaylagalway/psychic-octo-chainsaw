@@ -18,7 +18,7 @@ struct User {
     message: String
 }
 
-#[post("/", format = "json", data = "<user_data>")]
+#[post("/create_user", format = "json", data = "<user_data>")]
 fn create_user(user_data: Result<Json<User>, Error>) -> Json<String> {
     match user_data {
         Ok(json) => {
