@@ -1,10 +1,7 @@
 #[macro_use] extern crate rocket;
-use rocket::Response;
-use rocket::http::{ContentType, Status};
 use rocket::serde::{Deserialize, Serialize};
 use rocket::serde::json::Json;
-use rocket::Error;
-
+use rocket::serde::json::Error;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -22,23 +19,20 @@ struct User {
 }
 
 #[post("/", format = "json", data = "<user_data>")]
-fn create_user(user_data: Result<Json<User>, Error>) -> Result<Response<'static>, Status> {
+fn create_user(user_data: Result<Json<User>, Error>) -> Json<String> {
     match user_data {
         Ok(json) => {
-            let message = json.into_inner();
-            println!("received msg: {}", user_data.message);
-            Ok(Response::build())
-                .status(Status::Ok)
-                .header(ContentType::Plain)
-                .body("got it")
+            let user = json.into_inner();
+            println!("received msg: {}", user.message);
+            return Json(String::new());
         }   
-        Err(_) => Err(Status::BadRequest)
+        Err(_) => Json(String::new())
     }
 }
 
 #[launch]
 fn rocket() -> _ {
     let rock = rocket::build();
-    let r2 = rock.mount("/api", routes![index, kdawg]);
-    r2.mount("/", routes![index, kdawg])
+    let r2 = rock.mount("/api", routes![index, kdawg, create_user]);
+    r2.mount("/", routes![index, kdawg, create_user])
 }
