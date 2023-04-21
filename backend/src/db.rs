@@ -1,9 +1,10 @@
 use tokio_postgres::{NoTls, Error, Client};
-use dotenv;
+use dotenv::dotenv;
 
 #[tokio::main]
 pub async fn main() -> Result<Client, Error> {
-    dotenv::dotenv().ok();
+    dotenv().ok();
+
     let db_host = dotenv::var("host").unwrap();
     let db_user = dotenv::var("user").unwrap();
     let db_name = dotenv::var("dbname").unwrap();
