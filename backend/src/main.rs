@@ -4,7 +4,7 @@ mod api;
 use self::models::*;
 use diesel::{QueryDsl, RunQueryDsl, ExpressionMethods};
 use psychic_octo_chainsaw::*;
-use api::{index, kdawg, create_user};
+use api::*;
 
 #[launch]
 fn rocket() -> _ {
@@ -23,5 +23,5 @@ fn rocket() -> _ {
     }
 
     rocket::build()
-        .mount("/", routes![index, kdawg, create_user])
+        .mount("/api", routes![index, kdawg, create_user, auth_user])
 }

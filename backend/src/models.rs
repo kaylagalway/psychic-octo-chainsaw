@@ -9,6 +9,7 @@ pub struct User {
 }
 
 #[derive(Queryable)]
+
 pub struct Session {
     pub token: String,
     pub exp_date: i64,
