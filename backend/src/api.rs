@@ -14,13 +14,6 @@ pub fn kdawg() -> &'static str {
     "Hello Kayla"
 }
 
-// #[derive(Debug, Deserialize, Serialize)]
-// pub struct NewUser {
-//     email: String,
-//     password: String,
-//     username: String
-// }
-
 #[derive(Debug, Deserialize, Serialize)]
 pub struct AuthData {
     email: String,
