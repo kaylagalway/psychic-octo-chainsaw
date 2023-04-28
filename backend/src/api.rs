@@ -23,7 +23,7 @@ pub fn create_user(user_data: Result<Json<User>, Error>) -> Json<String> {
         Ok(json) => {
             let user = json.into_inner();
             println!("received msg: {}", user.message);
-            return Json(String::new());
+            Json(String::new())
         }   
         Err(_) => Json(String::new())
     }

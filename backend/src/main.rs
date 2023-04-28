@@ -2,7 +2,7 @@
 mod api;
 
 use self::models::*;
-use diesel::{prelude, QueryDsl, RunQueryDsl, ExpressionMethods};
+use diesel::{QueryDsl, RunQueryDsl, ExpressionMethods};
 use psychic_octo_chainsaw::*;
 use api::{index, kdawg, create_user};
 
