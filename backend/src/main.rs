@@ -12,14 +12,14 @@ fn rocket() -> _ {
 
     let conn = &mut establish_connection();
     let results = users
-    .filter(displayname.eq("davis"))
+    .filter(display_name.eq("davis"))
     .load::<User>(conn).expect("jesus christ");
 
     println!("Displaying {} posts", results.len());
     for post in results {
         println!("{}", post.email);
         println!("-----------\n");
-        println!("{}", post.displayname);
+        println!("{}", post.display_name);
     }
 
     rocket::build()

@@ -1,6 +1,8 @@
+use psychic_octo_chainsaw::models::NewUser;
 use rocket::serde::{Deserialize, Serialize};
 use rocket::serde::json::Json;
 use rocket::serde::json::Error;
+use psychic_octo_chainsaw::*;
 
 #[get("/")]
 pub fn index() -> &'static str {
@@ -12,12 +14,12 @@ pub fn kdawg() -> &'static str {
     "Hello Kayla"
 }
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct NewUser {
-    email: String,
-    password: String,
-    username: String
-}
+// #[derive(Debug, Deserialize, Serialize)]
+// pub struct NewUser {
+//     email: String,
+//     password: String,
+//     username: String
+// }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct AuthData {
@@ -29,8 +31,14 @@ pub struct AuthData {
 pub fn create_user(user_data: Result<Json<NewUser>, Error>) -> Json<String> {
     match user_data {
         Ok(json) => {
-            let user = json.into_inner();
-            println!("received msg: {}", user.email);
+            let new_user = json.into_inner();
+            println!("received msg: {}", new_user.email);
+            let user = NewUser {
+                email: new_user.email,
+                passhash: new_user.passhash,
+                display_name: new_user.display_name
+            };
+            insert_record(user);
             Json(String::from("Successful user creation"))
         }   
         Err(_) => Json(String::new())

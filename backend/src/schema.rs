@@ -10,7 +10,7 @@ diesel::table! {
 
 diesel::table! {
     users (email) {
-        displayname -> Varchar,
+        display_name -> Varchar,
         email -> Varchar,
         id -> Int4,
         passhash -> Varchar,
