@@ -2,7 +2,7 @@ use diesel::{prelude::*};
 use rocket::serde::{Deserialize, Serialize};
 use super::schema::*;
 
-#[derive(Queryable)]
+#[derive(Queryable, Selectable)]
 // #[diesel(table_name = users)]
 pub struct User {
     pub display_name: String,
@@ -19,9 +19,9 @@ pub struct NewUser {
     pub display_name: String
 }
 
-#[derive(Queryable)]
+#[derive(Queryable, Insertable, Selectable)]
 pub struct Session {
     pub token: String,
-    pub exp_date: i64,
+    pub exp_date: i32,
     pub user_id: i32
 }
